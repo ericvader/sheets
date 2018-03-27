@@ -1,7 +1,7 @@
 from distutils.core import setup
 
-setup(name='Sheets',
-      version='0.6',
+setup(name='sheets',
+      version='0.7',
       author='Marty Alchin',
       author_email='marty@martyalchin.com',
       url='https://github.com/gulopine/sheets/',
