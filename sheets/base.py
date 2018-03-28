@@ -79,7 +79,7 @@ class Row(object):
 class Reader(object):
     def __init__(self, row_cls, file):
         self.row_cls = row_cls
-        self.csv_reader = csv.reader(file, **row_cls._dialect.csv_dialect)
+        self.csv_reader = csv.reader(file, **row_cls._dialect.csv_dialect['csv_dialect'])
         self.skip_header_row = row_cls._dialect.has_header_row
 
     def __iter__(self):
@@ -88,11 +88,11 @@ class Reader(object):
     def __next__(self):
         # Skip the first row if it's a header
         if self.skip_header_row:
-            self.csv_reader.__next__()
+            self.csv_reader.next()
             self.skip_header_row = False
 
-        return self.row_cls(*self.csv_reader.__next__())
-
+        return self.row_cls(*self.csv_reader.next())
+    next = __next__
 
 class Writer(object):
     def __init__(self, row_cls, file):
